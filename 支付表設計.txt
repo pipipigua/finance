@@ -1,0 +1,14 @@
+CREATE TABLE `pin_order_bank` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`uid` int(11) DEFAULT 0 COMMENT '用户uid',
+`tableflag` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '业务表名',
+`pid` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '0' COMMENT '业务表id',
+`bankpostid` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '提交给银行的订单编号',
+`bankretid` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '银行返回的订单编号',
+`pay_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '支付类型',
+`pay_amount` int(11) DEFAULT 0 COMMENT '支付金额分',
+`pay_status` int(11) DEFAULT 0 COMMENT '支付状态',
+`pay_time` int(11) DEFAULT 0 COMMENT '支付时间',
+`ext` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '扩展信息',
+PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;

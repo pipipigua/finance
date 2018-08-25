@@ -2,7 +2,7 @@
 <body class="login-bg">
     
     <div class="login">
-        <div class="message">x-admin2.0-管理登录</div>
+        <div class="message">濠江中學教務系統</div>
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" >
@@ -11,7 +11,7 @@
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
             <input name="captcha" lay-verify="required" placeholder="验证码"  type="text" class="layui-input" style="width:50%;display:inline-block;">
-            <img src="{:url('admin/login/code')}" style="width:49%;float:right;margin-top:3px" onclick="this.src=this.src+'?'+Math.random()" alt="captcha" />
+            <img src="{:url('index/login/code')}" style="width:49%;float:right;margin-top:3px" onclick="this.src=this.src+'?'+Math.random()" alt="captcha" />
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
@@ -30,7 +30,7 @@
                 
 
                 $.ajax({
-                  url: '{:url('admin/login/checkdata')}',
+                  url: '{:url('index/login/checkdata')}',
                   type: 'POST',
                   dataType: 'json',
                   data: data.field,
@@ -43,7 +43,7 @@
                       });
                   }else{
                     layer.alert(res.info, {icon: 6},function(){
-                      location.href="{:url('admin/index/index')}"
+                      location.href="{:url('index/index')}"
                     });
                   }
                 })

@@ -1,11 +1,20 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
+use think\captcha\Captcha;
 
-class Index extends controller
+class Index extends Common
 {
     public function index()
     {
-		return $this->fetch('');       
+		return $this->fetch(); 
     }
+    public function welcome()
+	{
+		return $this->fetch('');
+
+	}
+
+
+
 }

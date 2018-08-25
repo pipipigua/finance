@@ -1,0 +1,76 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__STATIC__/layui2.1/dist/css/layui.css"  media="all">
+</head>
+<body> 
+ 
+<div class="demoTable">
+  搜索ID：
+  <div class="layui-inline">
+    <input class="layui-input" name="id" id="demoReload" autocomplete="off" type="text"  value="">
+  </div>
+  <button class="layui-btn" data-type="reload">搜索</button>
+</div>
+ 
+<table class="layui-hide" id="LAY_table_user" lay-filter="user"></table> 
+               
+          
+<script src="__STATIC__/layui2.1/dist/layui.js" charset="utf-8"></script>
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  
+  //方法级渲染
+  table.render({
+    elem: '#LAY_table_user'
+    ,url: '{:url('index/user/data')}'
+    ,cols: [[
+       {checkbox: true ,fixed: true},
+        {field: 'sid', title: 'id', width:50, sort: true, }
+      ,{field: 'snid', title: '学号', width:100, sort: true, }
+      ,{field: 'name', title: '姓名', width:80}
+      ,{field: 'sex', title: '性别', width:80, sort: true}
+      ,{field: 'nameid', title: '身份证号', width:180} 
+      // ,{field: 'citme', title: '入学时间', width: 100,sort: true}
+      ,{field: 'class', title: '班級', width: 80, sort: true}
+      ,{field: 'is_stop', title: '是否注册', width: 150, sort: true}
+      ,{field: 'phone', title: '手机号码', width: 180}
+    ]]
+    ,id: 'testReload'
+    ,page: true
+    ,height: 315
+  });
+  
+  var $ = layui.$, active = {
+    reload: function(){
+      var demoReload = $('#demoReload');
+      
+      //执行重载
+      table.reload('testReload', {
+        page: {
+          curr: 1 //重新从第 1 页开始
+        }
+        ,where: {
+            sid: demoReload.val() 
+        }
+
+      });
+    }
+  };
+  
+  $('.demoTable .layui-btn').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+});
+</script>
+
+</body>
+</html>

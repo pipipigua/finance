@@ -1,0 +1,71 @@
+
+<body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首頁</a>
+        <a>
+          <cite>繳費記錄</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+        <div class="x-body">
+      <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+
+          <input type="text"  value="" name="snid" id="snid"  placeholder="學號" autocomplete="off" class="layui-input">
+
+          <input type="text" value="" name="name"  placeholder="请输入姓名" autocomplete="off" class="layui-input">
+
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+      </div>
+
+    <table class="layui-table" lay-data="{height:'380 ', url:'{:url('index/user/payfor')}' ,method: 'post' , page:true, initSort:{field:'id', type:'desc'} }" lay-filter="test">
+      <thead>
+        <tr>
+
+          <th lay-data="{checkbox:true}"></th>
+          <th lay-data="{field:'sid', width:60, sort: true}">SID</th>
+          <th lay-data="{field:'snid', width:100}">學號</th>
+          <th lay-data="{field:'name', width:100}">姓名</th>
+          <th lay-data="{field:'sex', width:100, sort: true}">性别</th>
+          <th lay-data="{field:'nameid', width:180}">身份證號</th>
+          <th lay-data="{field:'timein',width:130}">入學時間</th>
+          <th lay-data="{field:'class',width:100, sort: true}">班級</th>
+          <th lay-data="{field:'is_stop',width:100, sort: true}">是否入學</th>
+          <th lay-data="{field:'phone',width:150}">手機號碼</th>
+          <th lay-data="{ width:90, align:'center', toolbar: '#barDemo'}"></th>
+        </tr>
+      </thead>
+    </table>
+
+    </div>
+<script>
+    layui.use('table', function(){
+      var table = layui.table;
+
+                //执行一个laydate实例
+
+        // table.reload('idTest', {
+        //   url: '{:url('index/user/payfor')}'
+        //   ,where: {} //设定异步数据接口的额外参数
+          
+        // });
+        table.on('checkbox(test)', function(obj){
+          console.log(obj.checked); //当前是否选中状态
+          console.log(obj.data); //选中行的相关数据
+          console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+        });
+              
+  
+});
+</script>
+<script type="text/html" id="barDemo">
+
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+
+
+</body>
+</html>

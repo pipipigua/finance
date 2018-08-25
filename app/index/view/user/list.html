@@ -1,0 +1,82 @@
+
+<body>
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首頁</a>
+        <a>
+          <cite>學生表</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+      <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+          <input type="text"  value="" name="snid" id="snid"  placeholder="學號" autocomplete="off" class="layui-input">
+          <button class="layui-btn" data-type="reload" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+      </div>
+    </div>  
+
+<table id="demo" lay-filter="test"  class="layui-table layui-hide"></table>
+
+<script>
+layui.use(['table','form'] function(){
+  var table = layui.table;
+  var form = layui.form
+
+//   //第一个实例
+  var tableIns = table.render({
+    response: {
+    statusName: 'code' //数据状态的字段名称，默认：code
+      ,statusCode: 200 //成功的状态码，默认：0
+    ,msgName: 'msg' //状态信息的字段名称，默认：msg
+    ,countName: 'count' //数据总数的字段名称，默认：count
+    ,dataName: 'data' //数据列表的字段名称，默认：data
+} 
+    ,id:'list'//容器唯一ID
+    ,elem: '#demo'
+    ,height: 350
+    ,url: "{:url('index/user/data')}" //数据接口
+    ,page: true //开启分页
+    ,cols: [[ //表头
+       {checkbox: true ,fixed: true},
+        {field: 'sid', title: 'id', width:50, sort: true, }
+      ,{field: 'snid', title: '学号', width:100, sort: true, }
+      ,{field: 'name', title: '姓名', width:80}
+      ,{field: 'sex', title: '性别', width:80, sort: true}
+      ,{field: 'nameid', title: '身份证号', width:180} 
+      // ,{field: 'citme', title: '入学时间', width: 100,sort: true}
+      ,{field: 'class', title: '班級', width: 80, sort: true}
+      ,{field: 'is_stop', title: '是否注册', width: 150, sort: true}
+      ,{field: 'phone', title: '手机号码', width: 180}
+          ]]
+      
+  });
+  var $ = layui.$, active = {
+    reload: function(){
+      var snid = $('#snid');
+      
+      //执行重载
+      tableIns.reload('list', {
+        page: {
+          curr: 1 //重新从第 1 页开始
+        }
+        ,where: {
+            id: snid.val() 
+        }
+      , method: 'post'
+      });
+    }
+  };
+  
+  $('.layui-row .layui-btn').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+
+});
+
+</script>
+</body>
+</html>
